@@ -182,7 +182,7 @@ def train_model(data_root, epochs=50, batch_size=32, device="cuda"):
     return best_acc
 
 #### INCREMENTAL #######
-def train_increment(data_root="/media/abk/New Disk/DATASETS/CLUSTER_INCREMENTAL_LEARNING", epochs=20, batch_size=8, device="cuda"):
+def train_increment(data_root="/media/abk/New Disk/DATASETS/CLUSTER_INCREMENTAL_LEARNING", epochs=50, batch_size=8, device="cuda"):
 
     
     # Standard transforms (Keeping it simple for prototype)

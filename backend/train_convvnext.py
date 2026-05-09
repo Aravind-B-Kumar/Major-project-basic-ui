@@ -8,7 +8,7 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 import numpy as np
 
-EMBEDDING_DIM = 512
+EMBEDDING_DIM = 256
 # =====================================================
 # 1. Metric-Learning Backbone (Improved)
 # =====================================================
@@ -26,7 +26,7 @@ class ConvNeXtIncremental(nn.Module):
             nn.Linear(in_features, 512),
             nn.LayerNorm(512),
             nn.ReLU(inplace=True),
-            nn.Dropout(dropout),  # Added dropout for regularization
+            #nn.Dropout(dropout),  # Added dropout for regularization
             nn.Linear(512, embedding_dim)
         )
 
@@ -196,7 +196,7 @@ def train_model(data_root, epochs=50, batch_size=32, lr=1e-4, device="cuda"):
                 'class_to_idx': train_ds.class_to_idx,
                 'classes': train_ds.classes,
                 'val_acc': val_acc
-            }, "models/convnext_best_weights.pth")
+            }, "models/new_convnext_now.pth")
             print(f"⭐ New Best Model Saved (Acc: {val_acc:.4f})")
         else:
             epochs_no_improve += 1
@@ -226,7 +226,7 @@ def train_model(data_root, epochs=50, batch_size=32, lr=1e-4, device="cuda"):
         'class_to_idx': train_ds.class_to_idx,
         'classes': train_ds.classes,
         'val_acc': best_acc
-    }, "models/convnext_final_for_ood.pth")
+    }, "models/convnext_final_for_iyoo.pth")
     
     print(f"✅ Final Model Saved with Accuracy: {best_acc:.4f}")
     return best_acc
@@ -269,7 +269,7 @@ if __name__ == "__main__":
     DATA_PATH = "/media/abk/New Disk/DATASETS/first/updatedDataset"
     
     # Train the model
-    best_acc = train_model(DATA_PATH, epochs=50)
+    best_acc = train_model(DATA_PATH, epochs=20)
     
     # Validate the final model
-    validate_final_model(DATA_PATH)
+    #validate_final_model(DATA_PATH)
